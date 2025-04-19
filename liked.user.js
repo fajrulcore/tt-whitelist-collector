@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TikTok Liked URL Collector 
 // @namespace    https://github.com/fajrulcore/tt-whitelist-collector
-// @version      1.0
+// @version      1.1
 // @description  Collect liked TikTok video links easily. Available for Chrome & Firefox Desktop.
 // @author       fajrulcore
 // @match        https://www.tiktok.com/*
@@ -42,9 +42,9 @@
     }
 
     function CreateButton() {
-        const tombol = document.createElement('button');
-        tombol.textContent = 'Download URL';
-        Object.assign(tombol.style, {
+        const button = document.createElement('button');
+        button.textContent = 'Download URL';
+        Object.assign(button.style, {
             position: 'fixed',
             bottom: '20px',
             right: '20px',
@@ -58,7 +58,7 @@
             boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
         });
 
-        tombol.onclick = () => {
+        button.onclick = () => {
             const urls = fetchAllURL();
             if (urls.length > 0) {
                 downloadTxt(urls);
@@ -67,7 +67,7 @@
             }
         };
 
-        document.body.appendChild(tombol);
+        document.body.appendChild(button);
     }
 
     window.addEventListener('load', () => {

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TikTok Favorites URL Collector
 // @namespace    https://github.com/fajrulcore/tiktok-url-collector
-// @version      1.0
+// @version      1.1
 // @description  Collect favorite TikTok video links easily on Chrome & Firefox Desktop
 // @author       fajrulcore
 // @match        https://www.tiktok.com/*
@@ -27,13 +27,13 @@
         }
     }
 
-    function downloadTxt(dataArray, namaFile = 'tiktok-url.txt') {
+    function downloadTxt(dataArray, fileName = 'tiktok-url.txt') {
         const blob = new Blob([dataArray.join('\n')], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
 
         const a = document.createElement('a');
         a.href = url;
-        a.download = namaFile;
+        a.download = fileName;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -42,9 +42,9 @@
     }
 
     function CreateButton() {
-        const tombol = document.createElement('button');
-        tombol.textContent = '📥 Download URL';
-        Object.assign(tombol.style, {
+        const button = document.createElement('button');
+        button.textContent = 'Download URL';
+        Object.assign(button.style, {
             position: 'fixed',
             bottom: '20px',
             right: '20px',
@@ -58,7 +58,7 @@
             boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
         });
 
-        tombol.onclick = () => {
+        button.onclick = () => {
             const urls = fetchAllURL();
             if (urls.length > 0) {
                 downloadTxt(urls);
@@ -67,7 +67,7 @@
             }
         };
 
-        document.body.appendChild(tombol);
+        document.body.appendChild(button);
     }
 
     window.addEventListener('load', () => {
